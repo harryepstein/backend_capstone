@@ -20,6 +20,5 @@ from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('diarytracker.urls')),
-] 
-
+    url(r'^', include('thesleeptrackerapp.urls')),
+]
