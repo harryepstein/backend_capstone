@@ -1,6 +1,6 @@
 from django.conf.urls import url
-import thesleeptrackerapp.views
+from thesleeptrackerapp.views import index
 
 urlpatterns = [
-    url(r'^$', thesleeptrackerapp.views.index, name='index'),
+    url(r'^$', index, name='index'),
 ]

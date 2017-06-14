@@ -1,17 +1,11 @@
-from django.shortcuts import render
-from __future__ import unicode_literals
+# # -*- coding: utf-8 -*-
+# # from __future__ import unicode_literals
+
+# from django.shortcuts import render
 
 
-def index(request):
-    '''
-    purpose: Shows last 20 products that have been added to the database
+# # Create your views here.
 
-    author: miriam rozenbuam
-
-    args: request
-
-    returns: (render): a view of the request, template to use, and product obj
-    '''
-
-    # display the index template
-    pass
+# def index(request):
+#     template_name = 'index.html'
+#     return render(request, template_name, {})

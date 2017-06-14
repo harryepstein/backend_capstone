@@ -1,0 +1,47 @@
+  {% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      <h2 style="text-align: center;" class="main-header"> SLEEP DIARY TRACKER</h2>
+    </div>
+  </div>
+      <div class="row">
+        <div class="col-md-12">
+
+        <div class="col-sm-2">
+          <br>
+          {% block sidebar %}
+          <nav role="navigation" class="navbar navbar-default">
+            <div class="navbar-header">
+              <ul class="sidebar-nav nav">
+                  <li><a href=>Home</a></li>
+                  <li><a href=>Product Categories</a></li>
+                  {% if user.is_authenticated %}
+                  <li><a href=>Sale Your Product</a></li>
+                  <li><a href=>Shopping Cart</a></li>
+                  <li><a href=>My Products</a></li>
+                  <li><a href=>Account</a></li>
+                  <li><a href=>Order History</a></li>
+                  <li><a href>Notifications ({{ notifications.count }}) </a></li>
+                  <br>
+                  <form type="get" action="/list_products">
+                      <input  id="search_box" type="text" name="search_box"  placeholder="Search..." >
+                      <button id="search_submit" type="submit" >Submit</button>
+                  </form>
+          {% endif %}
+              </ul>
+          {% endblock %}
+            </div>
+          </nav>
+        </div>
+        <div class="col-sm-8 page-header">
+          {% if user.is_authenticated %}
+            <h3 style="text-align: center;"> Good to see you again, {{user.username}}!!</h3>
+            <a href=">Logout</a>
+          {% else %}
+            <div class="register-link" style="text-align: center;"><a href=><b>Register an account for more personalized insights into your sleep habits</b></a></div>
+            <div style="text-align: center;"><a href=>Login to your account </a></div>
+          {% endif %}
+        </div>
+    </div>
+  </div>
+  {% endblock %}
