@@ -13,8 +13,9 @@
           <nav role="navigation" class="navbar navbar-default">
             <div class="navbar-header">
               <ul class="sidebar-nav nav">
-                  <li><a href=>Home</a></li>
-                  <li><a href=>Product Categories</a></li>
+                  <li><a href="{%url 'index' %}">Home</a></li>
+                  <li><a href="{%url 'morning_diary' %}">Morning Diary</a></li>
+                  <li><a href="{%url 'evening_diary' %}">Evening Diary</a></li>
                   {% if user.is_authenticated %}
                   <li><a href=>Sale Your Product</a></li>
                   <li><a href=>Shopping Cart</a></li>
@@ -24,6 +25,7 @@
                   <li><a href>Notifications ({{ notifications.count }}) </a></li>
                   <br>
                   <form type="get" action="/list_products">
+
                       <input  id="search_box" type="text" name="search_box"  placeholder="Search..." >
                       <button id="search_submit" type="submit" >Submit</button>
                   </form>
