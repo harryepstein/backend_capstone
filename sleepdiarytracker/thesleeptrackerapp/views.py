@@ -2,8 +2,10 @@
 # from __future__ import unicode_literals
 
 from django.shortcuts import render
-from thesleeptrackerapp.models import SleepData
+from thesleeptrackerapp.models import MorningSleepData, EveningSleepData
 from thesleeptrackerapp.forms import MorningDiaryForm, EveningDiaryForm
+from django.http import HttpResponseRedirect
+import numpy as np
 
 
 def morning_diary(request):
@@ -24,16 +26,13 @@ def morning_diary(request):
 
     # if POST, gather form_data, save, and redirect to account view.
     elif request.method == 'POST':
-        form_data = request.POST
 
-        p = PaymentType(
-            user=request.user,
-            name=form_data['name'],
-            account_number=form_data['account_number'])
 
-        p.save()
-        template_name = 'account/add_payment.html'
-        return HttpResponseRedirect('/view_account')
+        f = MorningDiaryForm(request.POST)
+        newsleepdata = f.save()
+
+        template_name = 'morning_diary.html'
+        return HttpResponseRedirect('/morning_diary')
 
 def evening_diary(request):
 
@@ -45,19 +44,29 @@ def evening_diary(request):
 
     # if POST, gather form_data, save, and redirect to account view.
     elif request.method == 'POST':
-        form_data = request.POST
 
-        p = PaymentType(
-            user=request.user,
-            name=form_data['name'],
-            account_number=form_data['account_number'])
-
-        p.save()
-        template_name = 'account/add_payment.html'
-        return HttpResponseRedirect('/view_account')
+        f = EveningDiaryForm(request.POST)
+        if f.is_valid():
+          f.save()
+        else:
+          return HttpResponseRedirect('/evening_diary')
+        return HttpResponseRedirect('/evening_diary')
 
 # Create your views here.
 
 def index(request):
+    all_evening_data = EveningSleepData.objects.all()
+    all_morning_data = MorningSleepData.objects.all()
+    '''
+    Fetch and convert all bedtimes to seconds in order to dynamically calculate total sleep time from the differnce between bedtime and
+    '''
+    def average_bedtime():
+      all_bedtimes = MorningSleepData.objects.values_list('bedtime')
+      bedtime_array = []
+      for time in all_bedtimes:
+        bedtime_array.append(time[0])
+
+        # print(time[1])
+
     template_name = 'index.html'
-    return render(request, template_name)
+    return render(request, template_name, {'all_morning_data': all_morning_data, 'all_evening_data': all_evening_data})

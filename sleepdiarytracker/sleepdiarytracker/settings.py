@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'thesleeptrackerapp',
-        'widget_tweaks',
+    'widget_tweaks',
 
 ]
 

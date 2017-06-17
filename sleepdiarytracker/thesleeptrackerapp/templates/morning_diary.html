@@ -2,6 +2,7 @@
   {% block content %}
   {% load staticfiles %}
   {% load widget_tweaks %}
+  <script type="text/javascript" src=www.google.com/charts></script>
 
 
     {% include "navbar.html" %}
@@ -9,6 +10,7 @@
     <h1>Enter Morning Diary Data</h1>
     <form action="{% url 'morning_diary' %}" method="post">
       {% csrf_token %}
+
       {{ morning_diary_form.as_p}}
       <input type="submit" value="Save Morning Diary" url/>
     </form>

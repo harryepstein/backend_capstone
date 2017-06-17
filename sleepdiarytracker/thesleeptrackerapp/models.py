@@ -6,7 +6,7 @@ from django import forms
 
 # Create your models here.
 
-class SleepData(models.Model):
+class MorningSleepData(models.Model):
 	"""Define and Create A Sleep Data table in the database."""
 
 	date = models.DateField(auto_now=True, auto_now_add=False)
@@ -39,7 +39,11 @@ class SleepData(models.Model):
 	subjective_waking_mood_rating = models.CharField(max_length=2, choices=subjective_waking_mood_rating_choices, default=SOMEWHAT_REFRESHED )
 	notes = models.TextField()
 
+	def get_fields(self):
+	  return [(field.name, field.value_to_string(self)) for field in MorningSleepData._meta.fields]
+
 	#Evening Diary
+class EveningSleepData(models.Model):
 
 	date = models.DateField(auto_now=True, auto_now_add=False)
 	caffeine_consumption_morning = models.BooleanField()

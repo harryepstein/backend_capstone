@@ -30,14 +30,52 @@
       <div class="col-sm-10">
         <h2> Global Sleep Statistics</h2>
         <p>THIS IS WHERE THE CHARTS WILL BE</p>
-        <{% lorem 3 p %}
+
         <h3>Click a graph for further breakdown</h3>
-        <div>
-          <ol>
-            {% for product in newest_20_products %}
-            <li><a href="{% url 'website:product_details' product.id %}">{{ product.title }}</a></li>
-            {% endfor %}
-          </ol>
+        <hr>
+        <div><label><h3>Morning Diary Data</h3></label><br>
+        <hr>
+        <!-- This is a comment -->
+            {% for obj in all_morning_data %}
+                <label>Entry # {{obj.pk}}</label><br>
+                Date: {{obj.date}}<br>
+                <hr>
+                Bedtime: {{obj.bedtime}}<br>
+                Out of Bed: {{obj.exit_bed_time}}<br>
+                Ease of falling asleep: {{obj.ease_of_sleep}}<br>
+                Number of times awoken: {{obj.times_awoken}}<br>
+                Number of minutes awake: {{obj.minutes_awake}}<br>
+                Total sleep time: {{obj.total_sleep_time}}<br>
+                Factors disturbing sleep: {{obj.factors_disturbing_sleep}}<br>
+                Subjective mood rating upon waking: {{obj.subjective_waking_mood_rating}}<br>
+                Notes: {{obj.notes}}<br>
+                <hr>
+             {% endfor%}
+
+
+        </div>
+        <hr>
+        <div><label><h3>Evening Diary Data</h3></label><br>
+            {% for obj in all_evening_data %}
+                <hr>
+                <label>Entry # {{obj.pk}}</label><br>
+                Date: {{obj.date}}<br><hr>
+                Consumed Caffeine in the Morning: {{obj.caffeine_consumption_morning}}<br>
+                Consumed Caffeine in the Afternoon: {{obj.caffeine_consumption_afternoon}}<br>
+                Consumed Caffeine in the Evening: {{obj.caffeine_consumption_evening}}<br>
+                Exercised in the morning: {{obj.exercised_morning}}<br>
+                Exercised in the afternoon: {{obj.exercised_afternoo}}<br>
+                Exercised in the evening: {{obj.exercised_evening}}<br>
+                Medications taken today: {{obj.todays_medications}}<br>
+                Took a nap: {{obj.took_a_nap}}<br>
+                Nap length: {{obj.length_of_nap}}<br>
+                Likelihood of dosing: {{obj.likelihood_of_dosing}}<br>
+                Day's subjective mood rating: {{obj.days_mood}}<br>
+                Prebedtime consumption: {{obj.pre_bedtime_consumption}}<br>
+                Bedtime routine: {{obj.bedtime_routine}}<br>
+             {% endfor%}
+
+
         </div>
       </div>
     </div>
