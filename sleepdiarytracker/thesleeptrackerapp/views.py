@@ -5,7 +5,7 @@ from django.shortcuts import render
 from thesleeptrackerapp.models import MorningSleepData, EveningSleepData
 from thesleeptrackerapp.forms import MorningDiaryForm, EveningDiaryForm
 from django.http import HttpResponseRedirect
-import numpy as np
+from django.db.models import Avg
 
 
 def morning_diary(request):
@@ -60,11 +60,11 @@ def index(request):
     '''
     Fetch and convert all bedtimes to seconds in order to dynamically calculate total sleep time from the differnce between bedtime and
     '''
-    def average_bedtime():
-      all_bedtimes = MorningSleepData.objects.values_list('bedtime')
-      bedtime_array = []
-      for time in all_bedtimes:
-        bedtime_array.append(time[0])
+    # average_bedtime = MorningSleepData.objects.all().aggregate(Avg('bedtime'))
+    # print("The average bedtime is", average_bedtime)
+
+
+
 
         # print(time[1])
 

@@ -77,7 +77,9 @@ class EveningSleepData(models.Model):
 		(UNPLEASANT, 'Unpleasant'),
 		(VERY_UNPLEASANT, 'Very Unpleasant'),
 	)
+
 	days_mood = models.CharField(max_length=4, choices=days_mood_choice, default=PLEASANT)
+
 	ALCOHOL = 'AL'
 	HEAVY_MEAL = 'HM'
 	CAFFEINE = 'CA'

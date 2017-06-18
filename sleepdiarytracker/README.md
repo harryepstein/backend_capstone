@@ -58,29 +58,7 @@ url: '/login'
 
 
 ## Usage
-1. Customer can add a product to sell
-2. User Can Complete an Order
-3. User can delete product from shopping cart
-4. User can delete a payment type
-5. User can cancel an order
-6. User can select product category when selling product
-7. User can view all product categories
-8. User can view all products that are of a particular product type
-9. User can view product detail
-10. User can view latest products on home page
-11. User can add a payment type
-12. User can see recommended products
-13. User can like or dislike products
-14. User can rate product after purchase. Seller can see that average
-15. User can recommend product to another User
-16. User can remove a sale post
-17. User can view and edit their account settings
-18. User can view status of products uploaded
-19. User can upload a photo of their product
-20. User can search for local products
-21. User can search products to buy
-22. Seller can specify local delivery available
-23. User can add a product to sell
+User can input data in the morning and evening for storage in the database and display on the homepage
 
 
 ## Contribute
