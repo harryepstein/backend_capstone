@@ -1,0 +1,14 @@
+  {% extends 'index.html' %}
+  {% block content %}
+  {% load staticfiles %}
+
+    {% include "navbar.html" %}
+
+    <h1>Enter Evening Diary Data</h1>
+
+    <form action="{% url 'evening_diary' %}" method="post">
+      {% csrf_token %}
+      {{ evening_diary_form.as_p }}
+      <input type="submit" value="Save Evening Diary" url/>
+    </form>
+{% endblock %}
