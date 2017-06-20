@@ -13,7 +13,9 @@ from bokeh.embed import components
 # from bokeh.sampledata.iris import flowers
 from bokeh.models.widgets import Select
 from bokeh.resources import CDN
+from bokeh.models import SingleIntervalTicker, LinearAxis
 import arrow
+import pandas as pd
 
 
 
@@ -76,49 +78,53 @@ def index(request):
         chart_values_y.append(item[1])
         # chart_values.append(morning_diary_google_charts_compatible_container)
 
-    print("chart values_x,y:", chart_values_x, chart_values_y)
+    # print("chart values_x,y:", chart_values_y[0])
 
 
 
 
-    x = chart_values_x
-    y = chart_values_y
-    title = 'y = f(x)'
+    title = 'Bedtime Over Time'
 
     plot = figure(title= title,
         x_axis_label= 'Date',
+        x_axis_type= 'datetime',
         y_axis_label= 'Bedtime',
-        plot_width =400,
+        y_axis_type='datetime',
+        plot_width =1000,
         plot_height=400)
 
-    plot.scatter(x, y, legend= 'f(x)', line_width = 2)
+    plot.scatter(chart_values_x, chart_values_y, legend= 'f(x)', line_width = 2)
     #Store components
     script, div = components(plot, CDN)
 
-
+    # ticker = SingleIntervalTicker(interval=1, num_minor_ticks=0)
+    # xaxis = LinearAxis(ticker=ticker)
+    # plot.add_layout(xaxis, 'below')
 
     template_name = 'index.html'
 
 
     return render(request, template_name, {'all_morning_data': all_morning_data, 'all_evening_data': all_evening_data, 'morning_diary_bedtime_and_date_tuple': morning_diary_bedtime_and_date_tuple,'script' : script , 'div' : div})
 
-def bokeh(request):
-    x= [1,3,5,7,9,11,13]
-    y= [1,2,3,4,5,6,7]
-    title = 'y = f(x)'
 
-    plot = figure(title= title,
-        x_axis_label= 'X-Axis',
-        y_axis_label= 'Y-Axis',
-        plot_width =400,
-        plot_height=400)
+# """NOT CURRENTLY IN USE"""
+# def bokeh(request):
+#     x= [1,3,5,7,9,11,13]
+#     y= [1,2,3,4,5,6,7]
+#     title = 'y = f(x)'
 
-    plot.line(x, y, legend= 'f(x)', line_width = 2)
-    #Store components
-    script, div = components(plot, CDN)
+#     plot = figure(title= title,
+#         x_axis_label= 'X-Axis',
+#         y_axis_label= 'Y-Axis',
+#         plot_width =400,
+#         plot_height=400)
 
-   #Feed them to the Django template.
-    return render_to_response( 'bokeh.html', {'script' : script , 'div' : div} )
+#     plot.line(x, y, legend= 'f(x)', line_width = 2)
+#     #Store components
+#     script, div = components(plot, CDN)
+
+#    #Feed them to the Django template.
+#     return render_to_response( 'bokeh.html', {'script' : script , 'div' : div} )
 
 # def bokeh(request):
 #     # s = Select(title="test", value="a", options=['a','b','c'])
