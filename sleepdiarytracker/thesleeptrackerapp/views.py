@@ -1,11 +1,20 @@
 # -*- coding: utf-8 -*-
 # from __future__ import unicode_literals
 
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from thesleeptrackerapp.models import MorningSleepData, EveningSleepData
 from thesleeptrackerapp.forms import MorningDiaryForm, EveningDiaryForm
 from django.http import HttpResponseRedirect
 from django.db.models import Avg
+import itertools
+
+from bokeh.plotting import figure, output_file, show
+from bokeh.embed import components
+# from bokeh.sampledata.iris import flowers
+from bokeh.models.widgets import Select
+from bokeh.resources import CDN
+import arrow
+
 
 
 def morning_diary(request):
@@ -57,16 +66,63 @@ def evening_diary(request):
 def index(request):
     all_evening_data = EveningSleepData.objects.all()
     all_morning_data = MorningSleepData.objects.all()
-    '''
-    Fetch and convert all bedtimes to seconds in order to dynamically calculate total sleep time from the differnce between bedtime and
-    '''
-    # average_bedtime = MorningSleepData.objects.all().aggregate(Avg('bedtime'))
-    # print("The average bedtime is", average_bedtime)
+
+    morning_diary_bedtime_and_date_tuple = list(MorningSleepData.objects.values_list('date','bedtime'))
+    chart_values_x = []
+    chart_values_y = []
+    for item in morning_diary_bedtime_and_date_tuple:
+        morning_diary_google_charts_compatible_container = []
+        chart_values_x.append(item[0])
+        chart_values_y.append(item[1])
+        # chart_values.append(morning_diary_google_charts_compatible_container)
+
+    print("chart values_x,y:", chart_values_x, chart_values_y)
 
 
 
 
-        # print(time[1])
+    x = chart_values_x
+    y = chart_values_y
+    title = 'y = f(x)'
+
+    plot = figure(title= title,
+        x_axis_label= 'Date',
+        y_axis_label= 'Bedtime',
+        plot_width =400,
+        plot_height=400)
+
+    plot.scatter(x, y, legend= 'f(x)', line_width = 2)
+    #Store components
+    script, div = components(plot, CDN)
+
+
 
     template_name = 'index.html'
-    return render(request, template_name, {'all_morning_data': all_morning_data, 'all_evening_data': all_evening_data})
+
+
+    return render(request, template_name, {'all_morning_data': all_morning_data, 'all_evening_data': all_evening_data, 'morning_diary_bedtime_and_date_tuple': morning_diary_bedtime_and_date_tuple,'script' : script , 'div' : div})
+
+def bokeh(request):
+    x= [1,3,5,7,9,11,13]
+    y= [1,2,3,4,5,6,7]
+    title = 'y = f(x)'
+
+    plot = figure(title= title,
+        x_axis_label= 'X-Axis',
+        y_axis_label= 'Y-Axis',
+        plot_width =400,
+        plot_height=400)
+
+    plot.line(x, y, legend= 'f(x)', line_width = 2)
+    #Store components
+    script, div = components(plot, CDN)
+
+   #Feed them to the Django template.
+    return render_to_response( 'bokeh.html', {'script' : script , 'div' : div} )
+
+# def bokeh(request):
+#     # s = Select(title="test", value="a", options=['a','b','c'])
+#     plot = figure()
+#     plot.circle([1,2], [3,4])
+#     script,div = components(plot)
+#     return render_to_response(request,'bokeh.html',{'script':script,'div':div})

@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'thesleeptrackerapp',
     'widget_tweaks',
+    'googlecharts'
+
 
 ]
 

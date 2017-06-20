@@ -25,16 +25,13 @@ Install Django and REST framework:
 pip install django
 ```
 
-Install Pillow:
-```
-pip install Pillow
 ```
 
 
 ## Installation
 ```
-git clone https://github.com/
-cd djangazon
+git clone https://github.com/harryepstein/backend_capstone.git
+cd thesleeptrackerapp
 ```
 Setting up the database:
 
@@ -58,7 +55,7 @@ url: '/login'
 
 
 ## Usage
-User can input data in the morning and evening for storage in the database and display on the homepage
+User can input data in the morning and evening for storage in the database and display on the homepage.
 
 
 ## Contribute

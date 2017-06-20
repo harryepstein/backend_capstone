@@ -9,12 +9,22 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.6.min.css" rel="stylesheet" type="text/css">
+  <link href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.6.min.css" rel="stylesheet" type="text/css">
+..<link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-0.9.0.min.css" type="text/css" />
+
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.6.min.js"></script>
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.6.min.js"></script>
+  <!-- <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-0.9.0.min.js"></script> -->
 
   <!-- Add additional CSS in static file -->
   {% load static %}
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  {{ script | safe }}
+  {% load staticfiles %}
+
 </head>
 
 <body>
@@ -22,11 +32,15 @@
   <div class="container-fluid">
 
     {% include "navbar.html" %}
-    {% debug%}
-    {% widget_tweaks.templatetags.widget_tweaks%}
+
+    {% comment "This is a comment that Django will understand" %}
+
+    {% endcomment %}
 
     <input type="text" name="input_test">
 
+    <p>Thus follows the div for the bokeh chart:</p>
+     {{ div | safe }}
     <div class="row" id="row1">
       <div class="col-sm-10">
         <h2> Global Sleep Statistics</h2>
@@ -80,10 +94,11 @@
         </div>
       </div>
     </div>
-
-
-
   </div>
 {% endblock %}
+
+
+
+
 </body>
-</html>
+    </html>

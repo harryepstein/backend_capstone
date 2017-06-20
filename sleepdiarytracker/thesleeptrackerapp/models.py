@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django import forms
+import arrow
 
 # Create your models here.
 
@@ -36,7 +37,7 @@ class MorningSleepData(models.Model):
 		(SOMEWHAT_REFRESHED, 'Somewhat Refreshed'),
 		(FATIGUED, 'Fatigued'),
 	)
-	subjective_waking_mood_rating = models.CharField(max_length=2, choices=subjective_waking_mood_rating_choices, default=SOMEWHAT_REFRESHED )
+	subjective_waking_mood_rating = models.CharField(max_length=2, choices=subjective_waking_mood_rating_choices, default=SOMEWHAT_REFRESHED 	)
 	notes = models.TextField()
 
 	def get_fields(self):
@@ -77,7 +78,6 @@ class EveningSleepData(models.Model):
 		(UNPLEASANT, 'Unpleasant'),
 		(VERY_UNPLEASANT, 'Very Unpleasant'),
 	)
-
 	days_mood = models.CharField(max_length=4, choices=days_mood_choice, default=PLEASANT)
 
 	ALCOHOL = 'AL'
