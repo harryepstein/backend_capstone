@@ -6,6 +6,8 @@ from thesleeptrackerapp.models import MorningSleepData, EveningSleepData
 from thesleeptrackerapp.forms import MorningDiaryForm, EveningDiaryForm, UserForm, ProfileForm
 from django.http import HttpResponseRedirect
 from django.db.models import Avg
+from django.template import RequestContext
+
 import itertools
 
 from bokeh.plotting import figure, output_file, show

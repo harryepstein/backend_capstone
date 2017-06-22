@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.contrib.auth.models import User
 from django import forms
 import arrow
 from datetime import timedelta, datetime, time
@@ -119,3 +120,23 @@ class EveningSleepData(models.Model):
 	)
 	pre_bedtime_consumption = models.CharField(max_length=4, choices=pre_bedtime_consumption_choices, default=NOT_APPLICABLE)
 	bedtime_routine = models.TextField()
+
+
+
+class Profile(User):
+    """
+    purpose: Creates Category table within database
+        Example useage:
+
+    author: Taylor Perkins, Justin Short, Harry
+
+    args: models.Model: (NA): models class given by Django
+
+    returns: (None): N/A
+    """
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone_number = models.TextField(blank=True, null=False, max_length=15)
+    address = models.TextField(blank=True, null=False, max_length=200)
+
+    def __str__(self):  # __unicode__ on Python 2
+        return self.user.first_name
