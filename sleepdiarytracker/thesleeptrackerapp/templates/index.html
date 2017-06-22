@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   {{ script | safe }}
+  {{ script2 | safe }}
   {% load staticfiles %}
 
 </head>
@@ -37,13 +38,16 @@
 
     {% endcomment %}
 
-    <input type="text" name="input_test">
+
 
 
     <div class="row" id="row1">
       <div class="col-sm-10">
         <h2> Global Sleep Statistics</h2>
           {{ div | safe }}
+
+          {{ div2 | safe}}
+
         <h3>Click a graph for further breakdown</h3>
         <hr>
         <div><label><h3>Morning Diary Data</h3></label><br>

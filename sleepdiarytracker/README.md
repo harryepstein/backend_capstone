@@ -1,9 +1,9 @@
-# Djangazon!! Bangazon on Django
+# Django Sleep Tracker
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
 A django webapp where users chronicle their sleep habits and data, gaining valuable insights into their data
 
-## Table of Contents
+## Table of Content
 
 - [About](#about)
 - [Installation](#installation)

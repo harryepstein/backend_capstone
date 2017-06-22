@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 from django.db import models
 from django import forms
 import arrow
+from datetime import timedelta, datetime, time
+from time import mktime, localtime
 
 # Create your models here.
 
@@ -13,6 +15,7 @@ class MorningSleepData(models.Model):
 	date = models.DateField(auto_now=True, auto_now_add=False)
 	bedtime = models.TimeField()
 	exit_bed_time = models.TimeField()
+
 
 	EASILY = 1
 	AFTER_SOME_TIME = 2
@@ -26,8 +29,32 @@ class MorningSleepData(models.Model):
 	ease_of_sleep = models.IntegerField(choices=ease_of_sleep_choices, default=AFTER_SOME_TIME)
 	times_awoken = models.IntegerField()
 	minutes_awake = models.IntegerField()
-	total_sleep_time = models.IntegerField()
+
+	#NEED TO CALCULATE TOTAL SLEEP TIME FROM THE DIFFERENCE BETWEEN THE BEDTIME AND THE EXIT_BED_TIME
+	# this is what I really want
+
+
+	def total_sleep_time_differece(self):
+
+
+		# bedtime_dt = datetime.fromtimestamp(mktime(localtime(self.bedtime)))
+		# exit_bed_time_dt = datetime.fromtimestamp(mktime(localtime(self.exit_bed_time)))
+		bedtime_dt = datetime(2012,1,1, self.bedtime.hour, self.bedtime.minute, self.bedtime.second)
+		exit_bed_time_dt = datetime(2012,1,1, self.exit_bed_time.hour, self.exit_bed_time.minute, self.exit_bed_time.second)
+
+
+		total_sleep_time_delta = bedtime_dt - exit_bed_time_dt
+		print("Thus follows total_sleep_time_delta:", total_sleep_time_delta)
+		return total_sleep_time_delta
+
+
+
+	total_sleep_time = models.DurationField()
+
+
+
 	factors_disturbing_sleep = models.TextField()
+
 
 	REFRESHED = 'RE'
 	SOMEWHAT_REFRESHED = 'SR'

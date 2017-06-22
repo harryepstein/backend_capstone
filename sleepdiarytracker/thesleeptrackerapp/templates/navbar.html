@@ -40,8 +40,8 @@
             <h3 style="text-align: center;"> Good to see you again, {{user.username}}!!</h3>
             <a href=">Logout</a>
           {% else %}
-            <div class="register-link" style="text-align: center;"><a href=><b>Register an account for more personalized insights into your sleep habits</b></a></div>
-            <div style="text-align: center;"><a href=>Login to your account </a></div>
+            <div class="register-link" style="text-align: center;"><a href="{%url 'register'%}"><b>Register an account for more personalized insights into your sleep habits</b></a></div>
+            <div style="text-align: center;"><a href="{%url 'login'%}">Login to your account </a></div>
           {% endif %}
         </div>
     </div>
